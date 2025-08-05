@@ -3,6 +3,7 @@ package com.brain.quiz_service.service.serviceImpl;
 import com.brain.quiz_service.feign.QuizInterface;
 import com.brain.quiz_service.model.QuestionWrapper;
 import com.brain.quiz_service.model.Quiz;
+import com.brain.quiz_service.model.QuizDto;
 import com.brain.quiz_service.model.Response;
 import com.brain.quiz_service.repository.QuizRepository;
 import com.brain.quiz_service.service.QuizService;
@@ -68,6 +69,17 @@ public class QuizServiceImpl implements QuizService {
 			e.printStackTrace();
 
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Override
+	public ResponseEntity<List<Quiz>> getAllQuizzes() {
+		try {
+			List<Quiz> quizzes = quizRepository.findAll();
+			return new ResponseEntity<>(quizzes, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

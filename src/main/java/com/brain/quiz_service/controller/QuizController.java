@@ -1,6 +1,7 @@
 package com.brain.quiz_service.controller;
 
 import com.brain.quiz_service.model.QuestionWrapper;
+import com.brain.quiz_service.model.Quiz;
 import com.brain.quiz_service.model.QuizDto;
 import com.brain.quiz_service.model.Response;
 import com.brain.quiz_service.service.QuizService;
@@ -30,5 +31,10 @@ public class QuizController {
 	@PostMapping("submit/{quizId}")
 	public ResponseEntity<Integer> submitQuiz(@PathVariable Long quizId, @RequestBody List<Response> response) {
 		return quizService.getQuizResult(quizId, response);
+	}
+
+	@GetMapping("getAll")
+	public ResponseEntity<List<Quiz>> getAllQuizzes() {
+		return quizService.getAllQuizzes();
 	}
 }
